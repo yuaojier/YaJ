@@ -1,4 +1,4 @@
-package com.jier.commons;
+package com.jier.commons.utils;
 
 import com.google.common.primitives.Primitives;
 import sun.misc.Unsafe;
@@ -37,7 +37,11 @@ public final class CopyUtils {
             return src;
         }
         if (visited.containsKey(src)) {
-            return (T) visited.get(src);
+            if ( src.getClass ().isLocalClass () ){
+                return src;
+            }
+            return (T) visited.get(src
+            );
         }
         if (src.getClass().isArray()) {
             return copyArray(src, visited);
